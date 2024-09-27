@@ -6,7 +6,6 @@ require (
 	github.com/ScottMansfield/nanolog v0.2.0
 	github.com/aws/aws-lambda-go v1.13.3
 	github.com/aws/aws-sdk-go v1.28.10
-	github.com/bsm/redeo v2.2.0+incompatible // indirect
 	github.com/buraksezer/consistent v0.0.0-20191006190839-693edf70fd72
 	github.com/cespare/xxhash v1.1.0
 	github.com/cornelk/hashmap v1.0.1

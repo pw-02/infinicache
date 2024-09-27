@@ -15,9 +15,9 @@ import (
 
 const (
 	// ARN of your AWS role, which has the proper policy (AWSLambdaFullAccess is recommended, see README.md for details).
-	ROLE = "arn:aws:iam::[aws account id]:role/[role name]"
+	ROLE = "arn:aws:iam::590178426343:role/SIONLambdaRole"
 	// AWS region, change it if necessary.
-	REGION = "us-east-1"
+	REGION = "us-west-2"
 )
 
 var (
@@ -35,11 +35,14 @@ var (
 	bucket  = flag.String("S3", "mason-leap-lab.infinicache", "S3 bucket for lambda code")
 
 	subnet = []*string{
-		aws.String("sb-your-subnet-1"),
-		aws.String("sb-your-subnet-2"),
+		//aws.String("subnet-0f290ea8bd4f975f7"),
+		//aws.String("subnet-0c4be172173a07d63"),
+		aws.String("subnet-0719017fb24af22ac"), //private subent - should not be the public one :)
+		aws.String("subnet-076f5a2c0e07e6b1e"),
 	}
 	securityGroup = []*string{
-		aws.String("sg-your-security-group"),
+		//aws.String("sg-04d7484a4474f9704"),
+		aws.String("sg-0e3cfe7dde2d319b2"),
 	}
 )
 
@@ -146,9 +149,10 @@ func createFunction(name string, svc *lambda.Lambda) {
 		Handler:      aws.String(*key),
 		MemorySize:   aws.Int64(*mem),
 		Role:         aws.String(ROLE),
-		Runtime:      aws.String("go1.x"),
-		Timeout:      aws.Int64(*timeout),
-		VpcConfig:    vpcConfig,
+		// Runtime:      aws.String("go1.x"),
+		Runtime:   aws.String("provided.al2023"),
+		Timeout:   aws.Int64(*timeout),
+		VpcConfig: vpcConfig,
 	}
 
 	result, err := svc.CreateFunction(input)

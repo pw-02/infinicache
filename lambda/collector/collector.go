@@ -4,32 +4,33 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
-	"github.com/aws/aws-lambda-go/lambdacontext"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	awsSession "github.com/aws/aws-sdk-go/aws/session"
-	"github.com/mason-leap-lab/infinicache/common/logger"
 	"strings"
 	"sync"
 
-	"github.com/mason-leap-lab/infinicache/lambda/types"
+	"github.com/aws/aws-lambda-go/lambdacontext"
+	"github.com/aws/aws-sdk-go/aws"
+	awsSession "github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/mason-leap-lab/infinicache/common/logger"
+
 	"github.com/mason-leap-lab/infinicache/lambda/lifetime"
+	"github.com/mason-leap-lab/infinicache/lambda/types"
 )
 
 const (
-	AWSRegion                      = "us-east-1"
-	S3BUCKET                       = "mason-leap-lab.infinicache"
+	AWSRegion = "us-west-2"
+	S3BUCKET  = "sion-default"
 )
 
 var (
-	Prefix         string
-	HostName       string
-	FunctionName   string
+	Prefix       string
+	HostName     string
+	FunctionName string
 
-	dataGatherer                   = make(chan *types.DataEntry, 10)
-	dataDepository                 = make([]*types.DataEntry, 0, 100)
+	dataGatherer   = make(chan *types.DataEntry, 10)
+	dataDepository = make([]*types.DataEntry, 0, 100)
 	dataDeposited  sync.WaitGroup
-	log            logger.ILogger  = &logger.ColorLogger{ Prefix: "collector ", Level: logger.LOG_LEVEL_INFO }
+	log            logger.ILogger = &logger.ColorLogger{Prefix: "collector ", Level: logger.LOG_LEVEL_INFO}
 )
 
 func init() {

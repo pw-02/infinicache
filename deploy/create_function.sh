@@ -4,9 +4,9 @@ BASE=`pwd`/`dirname $0`
 PREFIX="CacheNode"
 KEY="lambda"
 cluster=400
-mem=1024
+mem=2048
 
-S3="mason-leap-lab.infinicache"
+S3="sion-default"
 
 if [ "$2" != "" ] ; then
   PREFIX="$2"
