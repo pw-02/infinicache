@@ -6,7 +6,7 @@ import (
 	"github.com/mason-leap-lab/infinicache/proxy/lambdastore"
 )
 
-const AWSRegion = "us-west-1"
+const AWSRegion = "us-west-2"
 const LambdaMaxDeployments = 400
 const NumLambdaClusters = 400
 const LambdaStoreName = "LambdaStore" // replica version (no use)
