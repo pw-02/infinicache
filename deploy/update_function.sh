@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASE=`pwd`/`dirname $0`
-PREFIX="CacheNode"
+PREFIX="CacheNodeA"
 KEY="lambda"
 start=0
 cluster=20
