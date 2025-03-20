@@ -23,6 +23,6 @@ stop:
 		if [ -n "$$PIDS" ]; then \
 			kill -2 $$PIDS && echo "proxy/proxy process stopped."; \
 		else \
-			echo "No proxy/proxy process found."; \
+			kill -2 $$PIDS && echo ".proxy/proxy process stopped."; \
 		fi \
 	fi
