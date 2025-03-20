@@ -14,6 +14,7 @@ import (
 )
 
 const (
+
 	// ARN of your AWS role, which has the proper policy (AWSLambdaFullAccess is recommended, see README.md for details).
 	ROLE = "arn:aws:iam::590178426343:role/SIONLambdaRole"
 	// AWS region, change it if necessary.
@@ -28,11 +29,12 @@ var (
 	prefix  = flag.String("prefix", "CacheNode", "function name prefix")
 	vpc     = flag.Bool("vpc", false, "vpc config")
 	key     = flag.String("key", "lambda", "key for handler and file name")
-	from    = flag.Int64("from", 0, "the number of lambda deployment involved")
-	to      = flag.Int64("to", 400, "the number of lambda deployment involved")
-	batch   = flag.Int64("batch", 5, "batch Number, no need to modify")
-	mem     = flag.Int64("mem", 1024, "the memory of lambda")
-	bucket  = flag.String("S3", "sion-default", "S3 bucket for lambda code")
+
+	from   = flag.Int64("from", 0, "the number of lambda deployment involved")
+	to     = flag.Int64("to", 400, "the number of lambda deployment involved")
+	batch  = flag.Int64("batch", 5, "batch Number, no need to modify")
+	mem    = flag.Int64("mem", 256, "the memory of lambda")
+	bucket = flag.String("S3", "sion.default", "S3 bucket for lambda code")
 
 	subnet = []*string{
 		//aws.String("subnet-0f290ea8bd4f975f7"),
@@ -92,7 +94,6 @@ func updateConfig(name string, svc *lambda.Lambda, wg *sync.WaitGroup) {
 	}
 	fmt.Println(name, "\n", result)
 	wg.Done()
-	return
 }
 
 func updateCode(name string, svc *lambda.Lambda, wg *sync.WaitGroup) {
@@ -129,7 +130,6 @@ func updateCode(name string, svc *lambda.Lambda, wg *sync.WaitGroup) {
 	}
 	fmt.Println(name, "\n", result)
 	wg.Done()
-	return
 }
 
 func createFunction(name string, svc *lambda.Lambda) {
@@ -153,7 +153,7 @@ func createFunction(name string, svc *lambda.Lambda) {
 		Runtime:   aws.String("provided.al2023"),
 		Timeout:   aws.Int64(*timeout),
 		VpcConfig: vpcConfig,
-	}
+	} //
 
 	result, err := svc.CreateFunction(input)
 	if err != nil {
