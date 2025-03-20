@@ -1,10 +1,10 @@
 #!/bin/bash
 
 BASE=`pwd`/`dirname $0`
-PREFIX="CacheNode"
+PREFIX="CacheNodeA"
 KEY="lambda"
-cluster=400
-mem=2048
+cluster=20
+mem=128
 
 S3="sion-default"
 
