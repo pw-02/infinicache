@@ -148,9 +148,11 @@ func createFunction(name string, svc *lambda.Lambda) {
 		Handler:      aws.String(*key),
 		MemorySize:   aws.Int64(*mem),
 		Role:         aws.String(ROLE),
-		Runtime:      aws.String("go1.x"),
-		Timeout:      aws.Int64(*timeout),
-		VpcConfig:    vpcConfig,
+		// Runtime:      aws.String("go1.x"),
+		Runtime: aws.String("provided.al2023"),
+
+		Timeout:   aws.Int64(*timeout),
+		VpcConfig: vpcConfig,
 	}
 
 	result, err := svc.CreateFunction(input)
