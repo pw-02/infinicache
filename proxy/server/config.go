@@ -7,7 +7,7 @@ import (
 )
 
 const AWSRegion = "us-west-2"
-const LambdaMaxDeployments = 1
+const LambdaMaxDeployments = 20
 const NumLambdaClusters = 1
 const LambdaStoreName = "LambdaStore" // replica version (no use)
 const LambdaPrefix = "CacheNodeA"
