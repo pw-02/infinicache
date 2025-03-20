@@ -29,12 +29,11 @@ var (
 	prefix  = flag.String("prefix", "CacheNode", "function name prefix")
 	vpc     = flag.Bool("vpc", false, "vpc config")
 	key     = flag.String("key", "lambda", "key for handler and file name")
-
-	from   = flag.Int64("from", 0, "the number of lambda deployment involved")
-	to     = flag.Int64("to", 400, "the number of lambda deployment involved")
-	batch  = flag.Int64("batch", 5, "batch Number, no need to modify")
-	mem    = flag.Int64("mem", 256, "the memory of lambda")
-	bucket = flag.String("S3", "sion.default", "S3 bucket for lambda code")
+	from    = flag.Int64("from", 0, "the number of lambda deployment involved")
+	to      = flag.Int64("to", 400, "the number of lambda deployment involved")
+	batch   = flag.Int64("batch", 5, "batch Number, no need to modify")
+	mem     = flag.Int64("mem", 1024, "the memory of lambda")
+	bucket  = flag.String("S3", "mason-leap-lab.infinicache", "S3 bucket for lambda code")
 
 	subnet = []*string{
 		//aws.String("subnet-0f290ea8bd4f975f7"),
@@ -149,11 +148,10 @@ func createFunction(name string, svc *lambda.Lambda) {
 		Handler:      aws.String(*key),
 		MemorySize:   aws.Int64(*mem),
 		Role:         aws.String(ROLE),
-		// Runtime:      aws.String("go1.x"),
-		Runtime:   aws.String("provided.al2023"),
-		Timeout:   aws.Int64(*timeout),
-		VpcConfig: vpcConfig,
-	} //
+		Runtime:      aws.String("go1.x"),
+		Timeout:      aws.Int64(*timeout),
+		VpcConfig:    vpcConfig,
+	}
 
 	result, err := svc.CreateFunction(input)
 	if err != nil {
