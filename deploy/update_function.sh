@@ -8,7 +8,7 @@ cluster=20
 mem=128
 # try -code
 
-S3="mason-leap-lab.infinicache"
+S3="sion-default"
 EMPH="\033[1;33m"
 RESET="\033[0m"
 
