@@ -8,4 +8,8 @@ start: build
 	proxy/proxy 1>./log 2>&1 &
 
 stop:
-	kill -2 $(shell cat /tmp/infinicache.pid)
+	@if pgrep -f "proxy/proxy" > /dev/null; then \
+		kill -2 $$(pgrep -f "proxy/proxy") && echo "proxy/proxy process stopped."; \
+	else \
+		echo "No proxy/proxy process found."; \
+	fi
