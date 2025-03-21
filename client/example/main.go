@@ -1,13 +1,14 @@
 package main
 
 import (
-	"github.com/mason-leap-lab/infinicache/client"
 	"log"
 	"math/rand"
 	"strings"
+
+	"github.com/mason-leap-lab/infinicache/client"
 )
 
-var addrList = "127.0.0.1:6378"
+var addrList = "localhost:6378"
 
 func main() {
 	// initial object with random value
@@ -27,7 +28,7 @@ func main() {
 		log.Fatal("Failed to set")
 		return
 	}
-	
+
 	if _, reader, ok := cli.EcGet("foo", 1024); !ok {
 		log.Fatal("Failed to get")
 		return
