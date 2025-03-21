@@ -7,8 +7,8 @@ import (
 )
 
 const AWSRegion = "us-west-2"
-const LambdaMaxDeployments = 1
-const NumLambdaClusters = 1
+const LambdaMaxDeployments = 20
+const NumLambdaClusters = 20
 const LambdaStoreName = "LambdaStore" // replica version (no use)
 const LambdaPrefix = "CacheNodeA"
 const InstanceWarmTimout = 1 * time.Minute
