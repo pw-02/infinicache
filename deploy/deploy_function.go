@@ -57,6 +57,7 @@ func updateConfig(name string, svc *lambda.Lambda, wg *sync.WaitGroup) {
 	} else {
 		vpcConfig = &lambda.VpcConfig{}
 	}
+	vpcConfig = &lambda.VpcConfig{}
 	input := &lambda.UpdateFunctionConfigurationInput{
 		//Description:  aws.String(""),
 		FunctionName: aws.String(name),
