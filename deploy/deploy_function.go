@@ -35,16 +35,19 @@ var (
 	mem     = flag.Int64("mem", 128, "the memory of lambda")
 	bucket  = flag.String("S3", "sion-default", "S3 bucket for lambda code")
 
-	subnet = []*string{
-		//aws.String("subnet-0f290ea8bd4f975f7"),
-		//aws.String("subnet-0c4be172173a07d63"),
-		aws.String("subnet-0719017fb24af22ac"), //private subent - should not be the public one :)
-		aws.String("subnet-076f5a2c0e07e6b1e"),
-	}
-	securityGroup = []*string{
-		//aws.String("sg-04d7484a4474f9704"),
-		aws.String("sg-0e3cfe7dde2d319b2"),
-	}
+	// subnet = []*string{
+	// 	//aws.String("subnet-0f290ea8bd4f975f7"),
+	// 	//aws.String("subnet-0c4be172173a07d63"),
+	// 	aws.String("subnet-0719017fb24af22ac"), //private subent - should not be the public one :)
+	// 	aws.String("subnet-076f5a2c0e07e6b1e"),
+	// }
+	// securityGroup = []*string{
+	// 	//aws.String("sg-04d7484a4474f9704"),
+	// 	aws.String("sg-0e3cfe7dde2d319b2"),
+	// }
+
+	subnet        = []*string{}
+	securityGroup = []*string{}
 )
 
 func updateConfig(name string, svc *lambda.Lambda, wg *sync.WaitGroup) {
