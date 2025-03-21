@@ -8,7 +8,7 @@ import (
 	"github.com/mason-leap-lab/infinicache/client"
 )
 
-var addrList = "::1:6378"
+var addrList = "[::1]:6378"
 
 func main() {
 	// initial object with random value
