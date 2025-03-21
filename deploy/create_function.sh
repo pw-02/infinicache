@@ -17,9 +17,9 @@ read -p "Press any key to confirm, or ctrl-C to stop."
 
 cd $BASE/../lambda
 echo "Compiling lambda code..."
-GOOS=linux go build
-echo "Compressing file..."
-zip $KEY $KEY
+GOOS=linux GOARCH=amd64 go build -o bootstrap
+# zip $KEY $KEY
+zip $KEY bootstrap
 echo "Putting code zip to s3"
 aws s3api put-object --bucket ${S3} --key $KEY.zip --body $KEY.zip
 
