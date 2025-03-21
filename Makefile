@@ -5,7 +5,7 @@ build:
 	go build -o proxy/proxy github.com/mason-leap-lab/infinicache/proxy
 
 start: build
-	bin/proxy
+	./proxy/proxy 1>./log 2>&1 & echo $$! > /tmp/proxy.pid
 
 stop:
 	@if [ -f /tmp/proxy.pid ]; then \
