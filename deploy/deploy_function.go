@@ -26,14 +26,14 @@ var (
 	config  = flag.Bool("config", false, "update function config")
 	create  = flag.Bool("create", false, "create function")
 	timeout = flag.Int64("timeout", 60, "function timeout")
-	prefix  = flag.String("prefix", "CacheNode", "function name prefix")
+	prefix  = flag.String("prefix", "CacheNodeA", "function name prefix")
 	vpc     = flag.Bool("vpc", false, "vpc config")
 	key     = flag.String("key", "lambda", "key for handler and file name")
 	from    = flag.Int64("from", 0, "the number of lambda deployment involved")
-	to      = flag.Int64("to", 400, "the number of lambda deployment involved")
+	to      = flag.Int64("to", 200, "the number of lambda deployment involved")
 	batch   = flag.Int64("batch", 5, "batch Number, no need to modify")
-	mem     = flag.Int64("mem", 1024, "the memory of lambda")
-	bucket  = flag.String("S3", "mason-leap-lab.infinicache", "S3 bucket for lambda code")
+	mem     = flag.Int64("mem", 128, "the memory of lambda")
+	bucket  = flag.String("S3", "sion-default", "S3 bucket for lambda code")
 
 	subnet = []*string{
 		//aws.String("subnet-0f290ea8bd4f975f7"),

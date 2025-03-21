@@ -4,14 +4,15 @@ import (
 	"github.com/google/uuid"
 
 	//	"github.com/google/uuid"
-	"github.com/mason-leap-lab/infinicache/common/logger"
-	"github.com/mason-leap-lab/redeo"
-	"github.com/mason-leap-lab/redeo/resp"
 	"net"
 	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
+
+	"github.com/mason-leap-lab/infinicache/common/logger"
+	"github.com/mason-leap-lab/redeo"
+	"github.com/mason-leap-lab/redeo/resp"
 
 	"github.com/mason-leap-lab/infinicache/proxy/collector"
 	"github.com/mason-leap-lab/infinicache/proxy/global"
@@ -154,11 +155,11 @@ func (p *Proxy) HandleSet(w resp.ResponseWriter, c *resp.CommandStream) {
 	// Send chunk to the corresponding lambda instance in group
 	p.log.Debug("Requesting to set %s: %d", chunkKey, lambdaDest)
 	p.group.Instance(lambdaDest).C() <- &types.Request{
-		Id:           types.Id{connId, reqId, chunkId},
-		Cmd:          strings.ToLower(c.Name),
-		Key:          chunkKey,
-		BodyStream:   bodyStream,
-		ChanResponse: client.Responses(),
+		Id:              types.Id{ConnId: connId, ReqId: reqId, ChunkId: chunkId},
+		Cmd:             strings.ToLower(c.Name),
+		Key:             chunkKey,
+		BodyStream:      bodyStream,
+		ChanResponse:    client.Responses(),
 		EnableCollector: true,
 	}
 	// p.log.Debug("KEY is", key.String(), "IN SET UPDATE, reqId is", reqId, "connId is", connId, "chunkId is", chunkId, "lambdaStore Id is", lambdaId)
@@ -196,10 +197,10 @@ func (p *Proxy) HandleGet(w resp.ResponseWriter, c *resp.Command) {
 	// Send request to lambda channel
 	p.log.Debug("Requesting to get %s: %d", chunkKey, lambdaDest)
 	p.group.Instance(lambdaDest).C() <- &types.Request{
-		Id:           types.Id{connId, reqId, chunkId},
-		Cmd:          strings.ToLower(c.Name),
-		Key:          chunkKey,
-		ChanResponse: client.Responses(),
+		Id:              types.Id{ConnId: connId, ReqId: reqId, ChunkId: chunkId},
+		Cmd:             strings.ToLower(c.Name),
+		Key:             chunkKey,
+		ChanResponse:    client.Responses(),
 		EnableCollector: true,
 	}
 }
@@ -258,7 +259,7 @@ func (p *Proxy) dropEvicted(meta *Meta) {
 	for i, lambdaId := range meta.Placement {
 		instance := p.group.Instance(lambdaId)
 		instance.C() <- &types.Request{
-			Id:  types.Id{0, reqId, strconv.Itoa(i)},
+			Id:  types.Id{ConnId: 0, ReqId: reqId, ChunkId: strconv.Itoa(i)},
 			Cmd: "del",
 			Key: meta.ChunkKey(i),
 		}
